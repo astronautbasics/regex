@@ -1,0 +1,68 @@
+//astronautbasics//
+
+-------------------------------------------------
+Python 3.12.3
+-------------------------------------------------
+
+>>> import re
+
+>>> 'A' == r'A' == re.escape('A')
+True
+
+>>> '\\[' == r'\[' == re.escape('[')
+True
+
+>>> len('\\[')
+2
+
+>>> repr('\\[')
+"'\\\\['"
+
+-------------------------------------------------
+
+int    chr     esc
+32              \ 
+35      #       \#
+36      $       \$
+38      &       \&
+40      (       \(
+41      )       \)
+42      *       \*
+43      +       \+
+45      -       \-
+46      .       \.
+63      ?       \?
+91      [       \[
+92      \       \\
+93      ]       \]
+94      ^       \^
+123     {       \{
+124     |       \|
+125     }       \}
+126     ~       \~
+
+-------------------------------------------------
+
+finds non-word char
+>>> re.search('\\W', 'regex!basics')
+<re.Match object; span=(5, 6), match='!'>
+
+finds pattern that finds non-word char
+>>> re.search('\\\\W', 'regex\\Wbasics')
+<re.Match object; span=(5, 7), match='\\W'>
+
+-------------------------------------------------
+
+finds char in character class
+>>> re.search(r'[Aa]', 'regex!basics')
+<re.Match object; span=(7, 8), match='a'>
+
+finds character class
+>>> cc = r'\[[^\[\]]+\]'
+>>> re.search(cc, 'regex!b[Aa]sics')
+<re.Match object; span=(7, 11), match='[Aa]'>
+
+finds pattern that finds character class
+>>> re.search(re.escape(cc), 'regex' + cc + 'basics')
+<re.Match object; span=(5, 17), match='\\[[^\\[\\]]+\\]'>
+
